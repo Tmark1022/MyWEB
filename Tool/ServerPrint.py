@@ -150,7 +150,7 @@ elif Environment.is_linux():								# linux
 		def decorate_print(func):
 			def wrapper(*args, **kargs):
 				set_color(fore_color, back_color)
-				func()
+				func(*args, **kargs)
 				reset_color()
 			return wrapper
 		return decorate_print
