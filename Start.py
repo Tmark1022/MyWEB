@@ -36,8 +36,3 @@ if __name__ == "__main__":
 	PrintError("i am a error", "hahah")
 	PrintWarning("i am a Warning", "memeda")
 	PrintInfo("i am aa info")
-        print "hahah"
-        print "memeda"
-        print "i am tmark"
-	
-	

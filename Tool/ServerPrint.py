@@ -142,11 +142,11 @@ elif Environment.is_linux():								# linux
 	
 	def set_color(fore_color, back_color = None):
 		if back_color == None:
-                        str_temp = "\033[1;%sm" % fore_color
+			str_temp = "\033[1;%sm" % fore_color
 			print str_temp,
 		else:
 			str_temp = "\033[1;%s;%sm" % (fore_color, back_color)
-                        print str_temp,
+			print str_temp,
 			
 	def decorate_print_top(fore_color, back_color = None):
 		def decorate_print(func):
