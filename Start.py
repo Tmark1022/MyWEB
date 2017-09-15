@@ -21,7 +21,7 @@ from Tool import TabFile
 
 def main():
 	tab_file_engin = TabFile.TabFileEngine()
-	tab_file_engin.bind(r"./conf/MyWeb.conf")
+	tab_file_engin.bind(r"./Conf/MyWeb.conf")
 	key_value_dict = tab_file_engin.read_config()
 	import pprint
 	pprint.pprint(key_value_dict)
