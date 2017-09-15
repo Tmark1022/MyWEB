@@ -5,3 +5,4 @@
     web框架 ：tornado
     反向代理服务器：nginx
     模板引擎：mako
+	数据库：mysql、Redis
