@@ -11,6 +11,8 @@ import platform
 # 路径全局变量
 #====================================================
 RootPath = os.path.dirname(__file__)
+ConfPath = RootPath + os.sep + "Conf"
+ToolPath = RootPath + os.sep + "Tool"
 
 #====================================================
 # 将根目录加入sys.path
@@ -36,4 +38,4 @@ def is_linux():
 
 
 if __name__ == "__main__":
-	print RootPath,PlatForm
+	print RootPath,PlatForm, ConfPath, ToolPath
