@@ -12,7 +12,11 @@ import Environment
 # 列表输出函数
 def print_func(*args):
 	for arg in args:
-		print arg,
+		# window 控制台中文默认编码GBK，真操蛋，这里默认输入的都是utf-8
+		if Environment.is_window():
+			print arg.decode("utf-8").encode("gbk"),
+		else:
+			print arg,
 
 
 if Environment.is_window():										# window
@@ -101,7 +105,6 @@ if Environment.is_window():										# window
 		print_func(*args)
 		print
 		
-		
 elif Environment.is_linux():								# linux
 	'''
 	-------------------------------------------
@@ -188,7 +191,6 @@ else:														# other
 		print "Info:",
 		print_func(*args)
 		print
-	
 	
 #====================================================
 # 汇总接口

@@ -12,27 +12,20 @@ RootPath_temp = os.path.dirname(__file__)
 if RootPath_temp not in sys.path:
 	sys.path.append(RootPath_temp)
 	
-	
 #====================================================
 # 主要逻辑从这里开始
 #====================================================
-from Tool.ServerPrint import *
 import Environment
+from Tool import TabFile
 
 
-
-
-
-
-
-
-
-
-
-
-
+def main():
+	tab_file_engin = TabFile.TabFileEngine()
+	tab_file_engin.bind(r"./conf/MyWeb.conf")
+	key_value_dict = tab_file_engin.read_config()
+	import pprint
+	pprint.pprint(key_value_dict)
+	
 
 if __name__ == "__main__":
-	PrintError("i am a error", "hahah")
-	PrintWarning("i am a Warning", "memeda")
-	PrintInfo("i am aa info")
+	main()
