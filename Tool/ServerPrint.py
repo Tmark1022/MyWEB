@@ -142,9 +142,11 @@ elif Environment.is_linux():								# linux
 	
 	def set_color(fore_color, back_color = None):
 		if back_color == None:
-			print "\033[1;%sm" % fore_color
+                        str_temp = "\033[1;%sm" % fore_color
+			print str_temp,
 		else:
-			print "\033[1;%s;%sm" % (fore_color, back_color)
+			str_temp = "\033[1;%s;%sm" % (fore_color, back_color)
+                        print str_temp,
 			
 	def decorate_print_top(fore_color, back_color = None):
 		def decorate_print(func):
@@ -160,19 +162,16 @@ elif Environment.is_linux():								# linux
 	def print_error(*args):
 		print "Error_Exc:",
 		print_func(*args)
-		print
 	
 	@decorate_print_top(FOREGROUND_YELLOW)
 	def print_warning(*args):
 		print "Warning_Exc:",
 		print_func(*args)
-		print
 	
 	@decorate_print_top(FOREGROUND_GREEN)
 	def print_info(*args):
 		print "Info:",
 		print_func(*args)
-		print
 
 else:														# other
 	def print_error(*args):
