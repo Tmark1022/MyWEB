@@ -9,14 +9,14 @@ import Environment
 #====================================================
 # 系统打印模块
 #====================================================
-# 列表输出函数
+# 列表输出函数,调用str是为了兼容decode函数，有一些是直接输出有__str__函数的对象，调用str是可行的
 def print_func(*args):
 	for arg in args:
 		# window 控制台中文默认编码GBK，真操蛋，这里默认输入的都是utf-8
 		if Environment.is_window():
-			print arg.decode("utf-8").encode("gbk"),
+			print str(arg).decode("utf-8").encode("gbk"),
 		else:
-			print arg,
+			print str(arg),
 
 
 if Environment.is_window():										# window

@@ -17,15 +17,21 @@ if RootPath_temp not in sys.path:
 #====================================================
 import Environment
 from Tool import TabFile
-
+from Tool import ParseCmd
 
 def main():
-	tab_file_engin = TabFile.TabFileEngine()
-	tab_file_engin.bind(r"./Conf/MyWeb.conf")
-	key_value_dict = tab_file_engin.read_config()
-	import pprint
-	pprint.pprint(key_value_dict)
+#	tab_file_engin = TabFile.TabFileEngine()
+#	tab_file_engin.bind(r"./Conf/MyWeb.conf")
+#	key_value_dict = tab_file_engin.read_config()
+#	import pprint
+#	pprint.pprint(key_value_dict)
 	
-
+	print Environment.get_value("name")
+	print Environment.get_value("phonenum")
+	print Environment.get_value("hha")
+	print ParseCmd.parse_cmd_line()
+	
+	
+	
 if __name__ == "__main__":
 	main()
