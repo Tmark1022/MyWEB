@@ -16,20 +16,20 @@ if RootPath_temp not in sys.path:
 # 主要逻辑从这里开始
 #====================================================
 import Environment
-from Tool import TabFile
-from Tool import ParseCmd
+from Server import ParseCmd
+from Tool import ServerPrint
+from Define import NormalDefine
+
 
 def main():
-#	tab_file_engin = TabFile.TabFileEngine()
-#	tab_file_engin.bind(r"./Conf/MyWeb.conf")
-#	key_value_dict = tab_file_engin.read_config()
-#	import pprint
-#	pprint.pprint(key_value_dict)
+	# 命令行解析
+	options, _ = ParseCmd.parse_cmd_line()
+	for _option, _value in options:
+		if _option == "--help":
+			ParseCmd.help_info()
+			return
 	
-	print Environment.get_value("name")
-	print Environment.get_value("phonenum")
-	print Environment.get_value("hha")
-	print ParseCmd.parse_cmd_line()
+	#....
 	
 	
 	
