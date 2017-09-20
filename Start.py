@@ -15,12 +15,17 @@ if RootPath_temp not in sys.path:
 #====================================================
 # 主要逻辑从这里开始
 #====================================================
-import Environment
 from Server import ParseCmd
-from Tool import ServerPrint
-from Define import NormalDefine
+import Server.Application
+import tornado.ioloop
 
-
+# 这个函数执行到最后边就会进入ioloop了， 所以这个函数要放在最后边哦
+def tornado_start():
+	Server.Application.load_all_handlers()
+	app = Server.Application.make_app()
+	app.listen(1234)
+	tornado.ioloop.IOLoop.instance().start()
+	
 def main():
 	# 命令行解析
 	options, _ = ParseCmd.parse_cmd_line()
@@ -30,8 +35,8 @@ def main():
 			return
 	
 	#....
+	tornado_start()
 	
-	
-	
+
 if __name__ == "__main__":
 	main()
