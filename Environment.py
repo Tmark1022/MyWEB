@@ -15,6 +15,8 @@ ConfPath 	= RootPath + os.sep + "Conf"
 ToolPath 	= RootPath + os.sep + "Tool"
 ServerPath 	= RootPath + os.sep + "Server"
 HandlerPath	= ServerPath + os.sep + "Handler"
+DefinePath	= RootPath + os.sep + "Define"
+LogCachePath= RootPath + os.sep + "LogCache"
 
 #====================================================
 # 将根目录加入sys.path, 在Start模块加入了
@@ -36,4 +38,4 @@ def is_linux():
 
 
 if __name__ == "__main__":
-	print RootPath,PlatForm, ConfPath, ToolPath
+	print RootPath,PlatForm, ConfPath, ToolPath, DefinePath, LogCachePath

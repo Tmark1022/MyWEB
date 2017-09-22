@@ -19,5 +19,5 @@ if os.path.isfile(Environment.ConfPath + os.sep + "KV.conf"):
 #====================================================
 # 对外访问接口
 #====================================================
-def get_value(key_name):
-	return KVDict.get(key_name, None)
+def get_value(key_name, d = None):
+	return KVDict.get(key_name, d)

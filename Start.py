@@ -19,6 +19,7 @@ from Server import ParseCmd
 import Server.Application
 import tornado.ioloop
 
+
 # 这个函数执行到最后边就会进入ioloop了， 所以这个函数要放在最后边哦
 def tornado_start():
 	Server.Application.load_all_handlers()
@@ -34,9 +35,8 @@ def main():
 			ParseCmd.help_info()
 			return
 	
-	#....
+	# 开启tornado web 服务
 	tornado_start()
-	
 
 if __name__ == "__main__":
 	main()

@@ -193,10 +193,18 @@ else:														# other
 		print
 	
 #====================================================
+# 跨平台普通输出模块，兼容window控制台乱码问题
+#====================================================
+def print_normal(*args):
+	print_func(*args)
+	print
+
+#====================================================
 # 汇总接口
 #====================================================
-__all__ = ["PrintError", "PrintWarning", "PrintInfo"]
+__all__ = ["PrintError", "PrintWarning", "PrintInfo", "PrintNormal"]
 
 PrintError = print_error
 PrintWarning = print_warning
 PrintInfo = print_info
+PrintNormal = print_normal

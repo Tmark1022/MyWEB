@@ -14,3 +14,13 @@ def safe_call(func, *args, **kargs):
 	except Exception, e:
 		traceback.print_exc()
 		ServerPrint.PrintError(e)
+
+# safe_call 装饰器
+def safe_call_decorator(func):
+	def wrapper(*args, **kargs):
+		try:
+			return func(*args, **kargs)
+		except Exception, e:
+			traceback.print_exc()
+			ServerPrint.PrintError(e)
+	return wrapper
