@@ -18,6 +18,8 @@ if RootPath_temp not in sys.path:
 from Server import ParseCmd
 import Server.Application
 import tornado.ioloop
+import Log
+import Define.LogDefine
 
 
 # 这个函数执行到最后边就会进入ioloop了， 所以这个函数要放在最后边哦
@@ -36,7 +38,9 @@ def main():
 			return
 	
 	# 开启tornado web 服务
-	tornado_start()
+	# tornado_start()
+	Log.LogMessage(Define.LogDefine.WebRequestLogger, "new request")
+	
 
 if __name__ == "__main__":
 	main()
