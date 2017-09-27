@@ -4,63 +4,62 @@
 # date 		: 2017-9-25
 # module	: DB.Redis
 #===================================================
+import os
 import redis
-
-
-pool = redis.ConnectionPool(host = "127.0.0.1", port = 6379, db = 0)				# connect pool 的 作用就是对个strictredis实例共享一个连接， connect pool能使断线重连
-
-r = redis.Redis(connection_pool = pool)
-r.set("name", "tmark")
-print r.get("name")
-
+import Environment
+from Tool import Serialize, TabFile
 
 #====================================================
 # 连接配置
 #====================================================
 # 默认配置或者配置表需包含以下东西等
-#host='localhost', 
-#port=6379,
-#db=0
-#password=None,
-
-# 获得redis连接配置函数，使用到tabfile获取配置
-def get_redis_file_connect_config(file_name):
-	pass
-
+ConnectConfig = { "host" : 'localhost', 
+				"port" : 6379,
+				"db" : 0,
+				"password" : None}
+# 读文件刷新配置
+if os.path.isfile(Environment.ConfPath + os.sep + "Redis.conf"):
+	TabFileObj = TabFile.TabFileEngine()
+	TabFileObj.bind(Environment.ConfPath + os.sep + "Redis.conf")
+	ConnectConfig.update(TabFileObj.read_config())
+# 将配置表是字符串的改成数值
+ConnectConfig["port"] = int(ConnectConfig["port"])
+ConnectConfig["db"] = int(ConnectConfig["db"])
 
 #====================================================
 # redis数据库类
 #====================================================
 class RedisEngine(object):
 	'''
-	info
+	redis数据库连接操作管理类
 	'''
 	
 	# 类变量定义 ConnectionPool
-	# pool = redis.ConnectionPool(host = "127.0.0.1", port = 6379, db = 0)o
+	pool = redis.ConnectionPool(**ConnectConfig)
+	# 键名前缀,'cache-' + uuid.uuid4 + '-'
+	key_prefix = "cache-40bd42dd-4982-45bc-82ad-e36ab4a2234d-"
 	
-	
-	def __init__(self, file_name = None):
+	def __init__(self):
 		self.db = self.connect()
 	
 	def connect(self):
-#		return redis对象
-		pass
-	
-	
-	# 只对字符串操作， 将python对象pickle序列在存储等
+		return redis.Redis(connection_pool = self.pool)
+
 	def get(self, key):
-		pass
+		full_key = self.key_prefix + key
+		pickle_value = self.db.get(full_key)
+		# 已经过期了，就直接返回
+		if pickle_value is None:
+			return pickle_value
+		return Serialize.str2obj(pickle_value)
 	
-	def set(self, key, value):
-		pass
+	def set(self, key, value, expire_time = None):
+		full_key = self.key_prefix + key
+		# 将value序列化
+		pickle_value = Serialize.obj2str(value)
+		self.db.set(full_key, pickle_value, expire_time)
 
-
-
-
-#====================================================
-# 需要编写加密和序列化模块
-#====================================================
-
-
-
+if __name__ == "__main__":
+	obj = RedisEngine()
+	# obj.set("haha", {"name" : "tmark", "age" : 22}, 10)
+	print obj.get("haha")
