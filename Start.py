@@ -38,8 +38,8 @@ def main():
 			return
 	
 	# 开启tornado web 服务
-	# tornado_start()
-	Log.LogMessage(Define.LogDefine.WebRequestLogger, "new request")
+	tornado_start()
+	# Log.LogMessage(Define.LogDefine.WebRequestLogger, "new request")
 	
 
 if __name__ == "__main__":
