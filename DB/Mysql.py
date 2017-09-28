@@ -26,6 +26,14 @@ def get_connect_info():
 	return ConnectConfig
 
 #====================================================
+# 数据库表字典
+#====================================================
+table_format = "create table %s (%s)"
+TableDict = {"user" : table_format % ("user", "user_id varchar(20) not null primary key, passwd varchar(20) not null, nick_name varchar(20) not null"),
+			
+			}
+
+#====================================================
 # mysql 数据库管理类
 #====================================================
 class MysqlEngine(object):
@@ -198,10 +206,6 @@ class MysqlEngine(object):
 		
 if __name__ == "__main__":
 	db_obj = MysqlEngine(**get_connect_info())
-	table_format = "create table %s (%s)"
-	TableDict = {"user" : table_format % ("user", "user_id varchar(20) not null primary key, passwd varchar(20) not null, nick_name varchar(20) not null"),
-				
-				}
 	db_obj.check_and_create_table(TableDict)
 	
 	# print db_obj.run_sql("INSERT INTO `user` (`user_id`, `passwd`, `nick_name`) VALUES ('3', '2', '2')", True)
