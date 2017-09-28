@@ -96,8 +96,7 @@ class MysqlEngine(object):
 		values : string, 生成value(....)
 		set : string, 生成 set a = 10, b = 100等
 		sort : order by user_id desc, select 的时候排序(select限定使用)
-		limit : string, 分叶查询(select限定使用)
-		output_count : int, 最多输出多少条数据 (select限定使用)
+		limit : string, 分页查询(select限定使用)
 	}
 	'''
 	def add_data(self, sql_dict):
@@ -203,11 +202,11 @@ if __name__ == "__main__":
 	TableDict = {"user" : table_format % ("user", "user_id varchar(20) not null primary key, passwd varchar(20) not null, nick_name varchar(20) not null"),
 				
 				}
-	#db_obj.check_and_create_table(TableDict)
+	db_obj.check_and_create_table(TableDict)
 	
 	# print db_obj.run_sql("INSERT INTO `user` (`user_id`, `passwd`, `nick_name`) VALUES ('3', '2', '2')", True)
 	# print db_obj.add_data({"values" : "'5', '1', '1'", "table" : "user", "debug" : True})
 	# print db_obj.delete_data({"table" : "user", "debug" : True, "prerequisite" : "user_id = '2'"})
 	# print db_obj.modify_data({"table" : "user", "debug" : True, "prerequisite" : "user_id = '2'", "set" : "passwd = '1000', nick_name = 'tmark'"})
-	print db_obj.query_data({"table" : "user", "debug" : True, "field" : "user_id, nick_name", "sort" : "order by user_id desc", "limit" : "0,10"})
+	print db_obj.query_data({"table" : "user", "debug" : True, "field" : "user_id, nick_name", "sort" : "order by user_id desc", "limit" : "0,5"})
 	
