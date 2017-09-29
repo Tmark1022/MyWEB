@@ -93,13 +93,14 @@ def uuid_random():
 
 
 if __name__ == "__main__":
-	print uuid_random()
-	print md5("i am so handsome")
-	print sha1("i am so handsome")
-	temp_base64 = base64_encode("i\xb7\x1d\xfb\xef\xff")
-	print temp_base64
-	print base64_decode(temp_base64)
-	temp_base64 = url_base64_encode("i\xb7\x1d\xfb\xef\xff")
-	print temp_base64
-	print url_base64_decode(temp_base64)
+#	print uuid_random()
+#	print md5("i am so handsome")
+#	print sha1("i am so handsome")
+#	temp_base64 = base64_encode("i\xb7\x1d\xfb\xef\xff")
+#	print temp_base64
+#	print base64_decode(temp_base64)
+#	temp_base64 = url_base64_encode("i\xb7\x1d\xfb\xef\xff")
+#	print temp_base64
+#	print url_base64_decode(temp_base64)
+	print base64_encode(uuid_random().bytes + uuid_random().bytes)
 

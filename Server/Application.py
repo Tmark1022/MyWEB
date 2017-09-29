@@ -6,7 +6,9 @@
 #===================================================
 import tornado.web
 import Environment
+import KV
 from Tool import LoadModule,ServerPrint
+from Server import Session
 
 #====================================================
 # Application应用类
@@ -15,9 +17,27 @@ class Application(tornado.web.Application):
 	handlers = []
 	
 	def __init__(self):
-		settings = {}
+		settings = {
+				"cookie_secret" 	: KV.get_value("cookie_secret", "MyWeb_cookie_secret"),
+				"session_secret"	: KV.get_value("session_secret", "MyWeb_session_secret"),
+				"session_timeout"	: KV.get_value("session_timeout", 60),
+				
+				}
 		tornado.web.Application.__init__(self, handlers=self.handlers, **settings)
+		self.session_manager = Session.SessionManager(settings["session_secret"], settings["session_timeout"])
 		
+#		settings = dict(
+#            cookie_secret = "e446976943b4e8442f099fed1f3fea28462d5832f483a0ed9a3d5d3859f==78d",
+#            session_secret = "3cdcb1f00803b6e78ab50b466a40b9977db396840c28307f428b25e2277f1bcc",
+#            session_timeout = 60,
+#            template_path = os.path.join(os.path.dirname(__file__), "templates"),
+#            static_path = os.path.join(os.path.dirname(__file__), "static"),
+#            xsrf_cookies = True,
+#            login_url = "/login",
+#        )
+
+
+
 	@classmethod
 	def append_route(cls, route_tuple):
 		if not isinstance(route_tuple[0], basestring):

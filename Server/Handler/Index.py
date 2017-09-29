@@ -6,12 +6,20 @@
 #===================================================
 from Server.Handler import HandlerBase
 from Server import Application
+import time
 
 #====================================================
 # 主页handler
 #====================================================
 class IndexHandler(HandlerBase.BaseHandler):
 	def get(self):
+		self.write(str(self.session))
+		self.session["name"] = "tmark"
+		self.session["times"] = (self.session["times"] + 1) if self.session.get("times") else 1
+		self.session["last_time"] = time.time()
+		
+		# 保存session
+		self.save_session()
 		self.write("<h1>这是一个主页。</h1>")
 
 
