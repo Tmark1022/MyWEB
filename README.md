@@ -4,5 +4,5 @@
     编程语言 ：python
     web框架 ：tornado
     反向代理服务器：nginx
-    模板引擎：mako
+    模板引擎：mako (or tornado template)
 	数据库：mysql、Redis
