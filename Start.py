@@ -26,7 +26,7 @@ import Define.LogDefine
 def tornado_start():
 	Server.Application.load_all_handlers()
 	app = Server.Application.make_app()
-	app.listen(1234)
+	app.listen(8001)
 	tornado.ioloop.IOLoop.instance().start()
 	
 def main():

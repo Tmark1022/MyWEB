@@ -23,6 +23,7 @@ class Application(tornado.web.Application):
 				"session_timeout"	: KV.get_value("session_timeout", 60),
 				
 				}
+		
 		tornado.web.Application.__init__(self, handlers=self.handlers, **settings)
 		self.session_manager = Session.SessionManager(settings["session_secret"], settings["session_timeout"])
 		
